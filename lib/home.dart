@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:recepie_app/recepie.dart';
+import 'globals.dart' as globals;
 
 
 class HomeWidget extends StatefulWidget {
@@ -8,7 +10,8 @@ class HomeWidget extends StatefulWidget {
 
 class Home extends State<HomeWidget>{
   final List<String> _entries = <String>['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-  final List<String> _addedEntries = <String>[];
+  final String selected = '';
+  final List<String> _addedEntries = globals.addedEntries;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +36,10 @@ class Home extends State<HomeWidget>{
         setState(() {
           _added ? _addedEntries.remove(entry) : _addedEntries.add(entry);
         });
+      },
+      onLongPress: () => {
+        globals.selected = entry,
+        Navigator.push(context,MaterialPageRoute(builder: (context) => RecepieWidget())).then((value) { setState(() {});})
       },
     );
   }
