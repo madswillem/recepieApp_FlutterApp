@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:recepie_app/home.dart';
 import 'package:recepie_app/search.dart';
 
@@ -11,11 +12,16 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(
+      SystemUiMode.immersiveSticky,
+
+    );
     return MaterialApp(
       title: _title,
       theme: ThemeData(
           primarySwatch: Colors.orange
       ),
+
       home: MainWidget(),
     );
   }
@@ -48,8 +54,8 @@ class _MainWidgetState extends State<MainWidget> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: const [
-          Text("Messages"),
-          Icon(Icons.message),
+          Text("Add Rezept"),
+          Icon(Icons.add),
         ],
       ),
     );
@@ -60,8 +66,8 @@ class _MainWidgetState extends State<MainWidget> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: const [
-          Text("Rezepte"),
-          Icon(Icons.home),
+          Text("Add Rezepte"),
+          Icon(Icons.add),
         ],
       ),
     ),
@@ -70,8 +76,8 @@ class _MainWidgetState extends State<MainWidget> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: const [
-          Text("Messages"),
-          Icon(Icons.message),
+          Text("Vorschläge"),
+          Icon(Icons.recommend_outlined),
         ],
       ),
     ),
@@ -109,16 +115,16 @@ class _MainWidgetState extends State<MainWidget> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
+            icon: Icon(Icons.add),
+            label: 'Add Rezept',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Rezepte',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.message),
-            label: 'Messages',
+            icon: Icon(Icons.recommend),
+            label: 'Vorschläge',
           ),
         ],
         currentIndex: _selectedIndex,
