@@ -3,19 +3,14 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 Future<http.Response> fetchRecepies() async {
-
-  Map data;
-  List userData;
-
   final res = await http.get(Uri.http('192.168.178.64:5000', 'api'));
-
   return res;
 }
 
 class ParseRecepies {
   String? sId;
   String? title;
-  List<Ingredeants>? ingredeants;
+  List<Ingredients>? ingredients;
   String? preparation;
   int? selected;
   String? type;
@@ -25,7 +20,7 @@ class ParseRecepies {
   ParseRecepies(
       {this.sId,
         this.title,
-        this.ingredeants,
+        this.ingredients,
         this.preparation,
         this.selected,
         this.type,
@@ -35,10 +30,10 @@ class ParseRecepies {
   ParseRecepies.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
     title = json['title'];
-    if (json['ingredeants'] != null) {
-      ingredeants = <Ingredeants>[];
-      json['ingredeants'].forEach((v) {
-        ingredeants!.add(new Ingredeants.fromJson(v));
+    if (json['ingredients'] != null) {
+      ingredients = <Ingredients>[];
+      json['ingredients'].forEach((v) {
+        ingredients!.add(new Ingredients.fromJson(v));
       });
     }
     preparation = json['preparation'];
@@ -52,8 +47,8 @@ class ParseRecepies {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['_id'] = this.sId;
     data['title'] = this.title;
-    if (this.ingredeants != null) {
-      data['ingredeants'] = this.ingredeants!.map((v) => v.toJson()).toList();
+    if (this.ingredients != null) {
+      data['ingredients'] = this.ingredients!.map((v) => v.toJson()).toList();
     }
     data['preparation'] = this.preparation;
     data['selected'] = this.selected;
@@ -64,14 +59,14 @@ class ParseRecepies {
   }
 }
 
-class Ingredeants {
+class Ingredients {
   int? id;
   String? ingredient;
   String? amount;
 
-  Ingredeants({this.id, this.ingredient, this.amount});
+  Ingredients({this.id, this.ingredient, this.amount});
 
-  Ingredeants.fromJson(Map<String, dynamic> json) {
+  Ingredients.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     ingredient = json['ingredient'];
     amount = json['amount'];
